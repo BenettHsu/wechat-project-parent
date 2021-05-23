@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.xuben99.config.WechatAutoConfiguration,\
+cn.xuben99.service.WechatTokenService,\
+cn.xuben99.schedule.WechatTokenSchedule
