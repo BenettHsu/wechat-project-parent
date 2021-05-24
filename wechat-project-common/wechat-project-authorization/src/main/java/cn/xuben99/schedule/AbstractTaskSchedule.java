@@ -2,9 +2,6 @@ package cn.xuben99.schedule;
 
 import cn.xuben99.config.ScheduleProperties;
 import cn.xuben99.config.WechatProperties;
-import cn.xuben99.service.WechatTokenService;
-import cn.xuben99.utils.DateUtil;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,33 +13,39 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @EnableScheduling
-@EnableConfigurationProperties({WechatProperties.class,ScheduleProperties.class})
+@EnableConfigurationProperties({WechatProperties.class, ScheduleProperties.class})
 
-public abstract class AbstractSchedule implements InterfaceSchedule{
-    public WechatTokenService wechatTokenService;
+public abstract class AbstractTaskSchedule implements InterfaceTaskSchedule {
     public WechatProperties wechatProperties;
     public ScheduleProperties scheduleProperties;
-    public AbstractSchedule(WechatTokenService wechatTokenService
-            ,WechatProperties wechatProperties,ScheduleProperties scheduleProperties){
-        this.wechatTokenService = wechatTokenService;
+
+    public AbstractTaskSchedule(WechatProperties wechatProperties, ScheduleProperties scheduleProperties){
         this.wechatProperties = wechatProperties;
         this.scheduleProperties = scheduleProperties;
-
     }
 
-
-
     @Resource(name = "threadPool")
-    ExecutorService threadPool;
+    public ExecutorService threadPool;
 
     @Override
     public void execute(String taskName) {
         threadPool.execute(()->{
-            Timer timer = new Timer(taskName);
-            timer.start();
-            handle(taskName);
-            timer.end();
+            handleWithException(taskName);
         });
+    }
+
+    public void handleWithException(String taskName){
+        AtomicInteger currentRetryCount = new AtomicInteger(0);
+        int totalRetryCount = scheduleProperties.getExceptionRetryCount();
+        while (currentRetryCount.get() < totalRetryCount){
+            try {
+                handle();
+                return;
+            }catch (Exception e){
+                log.error(e.getMessage());
+                retryHandleWhenException(currentRetryCount,taskName);
+            }
+        }
     }
 
     public void retryHandleWhenException(AtomicInteger currentRetryCount,String taskName){
@@ -62,24 +65,5 @@ public abstract class AbstractSchedule implements InterfaceSchedule{
         log.error("not implement handle method!");
     }
 
-    @Data
-    public class Timer {
-        private String taskName;
-        private Long startTime;
-        private Long endTime;
 
-        Timer(String taskName) {
-            this.taskName = taskName;
-        }
-
-        public void start() {
-            startTime = System.currentTimeMillis();
-            log.info(">>>>>>>>>> {}任务调度开始:{} ", taskName, DateUtil.getCurrentStr());
-        }
-
-        public void end() {
-            endTime = System.currentTimeMillis();
-            log.info("<<<<<<<<<< {}任务调度结束 用时:{}毫秒", taskName, endTime - startTime);
-        }
-    }
 }

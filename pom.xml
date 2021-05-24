@@ -15,18 +15,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <com.citms.component.version>0.0.1-SNAPSHOT</com.citms.component.version>
-        <org.apache.httpclient>4.5.2</org.apache.httpclient>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.citms</groupId>
-                <artifactId>project-builder-component</artifactId>
-                <version>${com.citms.component.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <repositories><!-- 代码库 -->
         <repository>

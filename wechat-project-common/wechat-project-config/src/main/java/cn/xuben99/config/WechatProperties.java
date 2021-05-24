@@ -15,8 +15,4 @@ public class WechatProperties {
      * 微信公众平台 appSecret
      */
     private String appSecret;
-    /**
-     * 微信公众平台 官方提供的api 鉴权地址
-     */
-    private String wechatGrantUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 }

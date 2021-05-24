@@ -36,13 +36,11 @@ public class HttpUtil {
      * get请求
      * @return
      */
-    public static String doGet(String url) {
-        try {
-            HttpClient client = new DefaultHttpClient();
+    public static String doGet(String url) throws IOException {
+        HttpClient client = new DefaultHttpClient();
             //发送get请求
             HttpGet request = new HttpGet(url);
             HttpResponse response = client.execute(request);
-
             /**请求发送成功，并得到响应**/
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 /**读取服务器返回过来的json字符串数据**/
@@ -50,11 +48,6 @@ public class HttpUtil {
 
                 return strResult;
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
         return null;
     }
 
@@ -129,9 +122,7 @@ public class HttpUtil {
         StringEntity entity = new StringEntity(params, charSet);
         httpPost.setEntity(entity);
         CloseableHttpResponse response = null;
-
         try {
-
             response = httpclient.execute(httpPost);
             StatusLine status = response.getStatusLine();
             int state = status.getStatusCode();
@@ -143,8 +134,7 @@ public class HttpUtil {
             else{
                 //logger.error("请求返回:"+state+"("+url+")");
             }
-        }
-        finally {
+        } finally {
             if (response != null) {
                 try {
                     response.close();
