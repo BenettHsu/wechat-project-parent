@@ -13,9 +13,26 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
     </properties>
+
+    <scm>
+        <url>https://gitee.com/xuben99/wechat-project-parent</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>xu.ben</name>
+            <email>xuben1999@163.com</email>
+            <organization>citms</organization>
+            <organizationUrl>http://www.citms.cn/</organizationUrl>
+        </developer>
+    </developers>
 
     <repositories><!-- 代码库 -->
         <repository>
@@ -31,6 +48,4 @@
             </snapshots>
         </repository>
     </repositories>
-
-
 </project>

@@ -19,24 +19,59 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <com.citms.component.version>0.0.1-SNAPSHOT</com.citms.component.version>
-        <org.apache.httpclient>4.5.6</org.apache.httpclient>
+<!--        springboot-->
+        <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
+<!--        third utils-->
+        <alibaba.fastjson.version>1.2.73</alibaba.fastjson.version>
+        <hutool.version>4.1.1</hutool.version>
+        <apache.httpclient.version>4.5.5</apache.httpclient.version>
+        <commons.lang3.version>3.4</commons.lang3.version>
+        <lombok.version>1.16.22</lombok.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+<!--            springboot-->
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
             <dependency>
-                <groupId>com.citms</groupId>
-                <artifactId>project-builder-component</artifactId>
-                <version>${com.citms.component.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
+
+<!--            third utils -->
+            <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${alibaba.fastjson.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>${org.apache.httpclient}</version>
+                <version>${apache.httpclient.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!--            wechat component version lock-->
             <dependency>
                 <artifactId>wechat-project-config</artifactId>
                 <groupId>cn.xuben99</groupId>

@@ -81,7 +81,6 @@ public class DateUtil {
         instance.add(Calendar.DAY_OF_MONTH,dayOffset);
     }
 
-
     public static void setHourMinuteSecondByOffset(Calendar instance,int hourOffset,int minuteOffset,int secondOffset){
         instance.add(Calendar.HOUR_OF_DAY,hourOffset);
         instance.add(Calendar.MINUTE,minuteOffset);
@@ -104,13 +103,4 @@ public class DateUtil {
         return new SimpleDateFormat(pattern).parse(str);
     }
 
-    public static void main(String[] args) {
-        System.out.println(getCurrentHourPoint());
-        System.out.println(getHourPointByCurrentOffset(-1));
-        System.out.println(getTodayStart());
-        System.out.println(getTodayEnd());
-        System.out.println(getStartByTodayOffset(-1));
-        System.out.println(getEndByTodayOffset(-1));
-        System.out.println(getHourPointByDateOffset(0,new Date()));
-    }
 }
